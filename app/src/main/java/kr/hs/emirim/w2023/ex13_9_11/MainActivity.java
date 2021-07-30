@@ -7,9 +7,11 @@ import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     SeekBar seek1, seek2;
+    TextView tv1,tv2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         setTitle("Thread 기본");
         seek1 = findViewById(R.id.seek1);
         seek2 = findViewById(R.id.seek2);
+        tv1=findViewById(R.id.tv1);
+        tv2=findViewById(R.id.tv2);
         Button btnStart = findViewById(R.id.btn_start);
 
         btnStart.setOnClickListener(new View.OnClickListener() {
@@ -28,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         for(int i = seek1.getProgress(); i<100; i=i+2) {
                             seek1.setProgress(seek1.getProgress());
+                            tv1.setText(R.string.tv1);
+                            tv1.append(" "+seek1.getProgress()+"%");
                             SystemClock.sleep(100);
                         }
                     }
@@ -36,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         for(int i = seek1.getProgress(); i<100; i=i+1) {
-                            seek1.setProgress(seek1.getProgress());
+                            seek2.setProgress(seek2.getProgress());
+                            tv2.setText(R.string.tv1);
+                            tv2.append(" "+seek2.getProgress()+"%");
                             SystemClock.sleep(100);
                         }
                     }
